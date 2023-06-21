@@ -1,0 +1,37 @@
+server:
+  port: 18082
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+spring:
+  application:
+    name: GATEWAY-SERVICE
+  cloud:
+    gateway:
+      routes:
+        - id: order-service
+          uri: http://localhost:18080/
+          predicates:
+            - Path=/orders/**
+
+        - id: payment-service
+          uri: http://localhost:18081/
+          predicates:
+            - Path=/payment/**
+
+management:
+  endpoint:
+    shutdown:
+      enable: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - '*'

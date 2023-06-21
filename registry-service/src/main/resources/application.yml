@@ -1,0 +1,16 @@
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+server:
+  port: 8761
+
+management:
+  endpoint:
+    shutdown:
+      enable: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - '*'
